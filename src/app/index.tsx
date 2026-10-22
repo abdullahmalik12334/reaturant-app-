@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
   Alert,
   Image,
@@ -10,9 +10,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+const API_URL = "http://10.0.12.181:5001";
 
 /*
   EMBERFORK
+
   ----------
   Frontend-only React Native + TypeScript restaurant app.
   No backend, API, database, or extra package is required.
@@ -20,7 +22,7 @@ import {
   Paste this complete file into:
   src/app/index.tsx
 */
-
+const [authToken, setAuthToken] = useState("");
 type Screen =
   | "welcome"
   | "login"
@@ -628,6 +630,7 @@ function ProductCard({
 }
 
 export default function Index() {
+  const [authToken, setAuthToken] = useState("");
   const [screen, setScreen] = useState<Screen>("welcome");
   const [themeKey, setThemeKey] = useState<ThemeKey>("sand");
 
@@ -671,21 +674,17 @@ export default function Index() {
 
   const trackingOrder = orders.find((order) => order.id === trackingOrderId);
   const latestOrder = orders[0];
+const filteredFood = FOOD.filter((item) => {
+  const q = search.trim().toLowerCase();
+  const categoryMatch =
+    selectedCategory === "All" || item.category === selectedCategory;
+  const searchMatch =
+    !q ||
+    item.name.toLowerCase().includes(q) ||
+    item.category.toLowerCase().includes(q);
 
-  const filteredFood = useMemo(() => {
-    return FOOD.filter((item) => {
-      const q = search.trim().toLowerCase();
-      const categoryMatch =
-        selectedCategory === "All" || item.category === selectedCategory;
-      const searchMatch =
-        !q ||
-        item.name.toLowerCase().includes(q) ||
-        item.category.toLowerCase().includes(q);
-
-      return categoryMatch && searchMatch;
-    });
-  }, [search, selectedCategory]);
-
+  return categoryMatch && searchMatch;
+});
   const favoriteFood = FOOD.filter((item) => favorites.includes(item.id));
 
   const toggleFavorite = (id: string) => {
@@ -790,21 +789,47 @@ export default function Index() {
     );
   };
 
-  const signIn = () => {
-    if (!loginEmail || !loginPassword) {
-      Alert.alert("Missing information", "Enter your email and password.");
+const signIn = async () => {
+  if (!loginEmail.trim() || !loginPassword) {
+    Alert.alert("Missing information", "Enter your email and password.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: loginEmail.trim().toLowerCase(),
+        password: loginPassword,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      Alert.alert(
+        "Login failed",
+        data.message || "Please check your email and password."
+      );
       return;
     }
 
-    if (loginEmail.toLowerCase() === "manager@emberfork.com") {
-      setScreen("manager");
-      return;
-    }
-
-    setProfileName(signupName || "EmberFork Guest");
-    setProfileEmail(loginEmail);
+    setAuthToken(data.token || "");
+    setProfileName(data.user?.name || "Guest");
+    setProfileEmail(data.user?.email || loginEmail.trim());
     setScreen("home");
-  };
+
+    Alert.alert("Welcome back!", "You have signed in successfully.");
+  } catch (error) {
+    Alert.alert(
+      "Connection error",
+      "Backend se connection nahi ho raha. Check karo ke server chal raha hai aur API_URL sahi hai."
+    );
+  }
+};
 
   if (screen === "welcome") {
     return (

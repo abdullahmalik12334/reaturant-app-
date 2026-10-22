@@ -1,56 +1,259 @@
-# Welcome to your Expo app 👋
+# 🍽️ CraveNest — Restaurant App FULL STACK (Assignment #02)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+CraveNest is a restaurant application developed using React Native (Expo), Node.js, Express.js, and MongoDB. The application allows customers to explore food items, browse different food categories, manage their favorites, add items to their cart, and place food orders. It also includes table reservation functionality and a backend API for managing restaurant data.
 
-## Get started
+## 🚀 Tech Stack
 
-1. Install dependencies
+| Layer | Technology |
+|---|---|
+| Mobile App | React Native, Expo |
+| Frontend Language | TypeScript, TSX |
+| Navigation | Expo Router |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas / MongoDB Compass |
+| ODM | Mongoose |
+| Authentication | JWT (JSON Web Token) |
+| Password Security | bcryptjs |
+| API Testing | Thunder Client / Postman |
+| Development Tools | Visual Studio Code, macOS Terminal |
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+### 👤 Customer Features
 
-   ```bash
-   npx expo start
-   ```
+- Customer registration and login
+- JWT-based authentication
+- Browse available food items
+- Explore different food categories
+- View food images, names, descriptions, and prices
+- Search for food items
+- Add and remove items from favorites
+- Add and remove items from the cart
+- Update food item quantities
+- Calculate cart subtotal and total amount
+- Place food orders
+- Select available payment methods
+- Make table reservations
+- View and manage profile information
+- Change the application theme
+- Mobile-friendly user interface
 
-In the output, you'll find options to open the app in a
+### 👨‍🍳 Restaurant Management Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Manage restaurant food menu through backend APIs
+- Store and retrieve food items from MongoDB
+- Manage customer orders through implemented order APIs
+- Manage table reservations through implemented reservation APIs
+- Store customer accounts and profile information
+- Manage food reviews through the review API
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+*Note: Manager-specific access, order status management, and individual CRUD operations depend on the routes and role-based authorization implemented in the backend.*
 
-## Get a fresh project
+## 🗂️ Project Structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+restaurant-app/
+│
+├── src/
+│   └── app/
+│       ├── index.tsx
+│       ├── _layout.tsx
+│       └── explore.tsx
+│
+├── CraveNest-Backend/
+│   ├── middleware/
+│   │   └── auth.js
+│   │
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Food.js
+│   │   ├── Order.js
+│   │   ├── Reservation.js
+│   │   └── Review.js
+│   │
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── foods.js
+│   │   ├── orders.js
+│   │   ├── reservations.js
+│   │   └── reviews.js
+│   │
+│   ├── .env
+│   ├── package.json
+│   ├── seed.js
+│   └── server.js
+│
+├── package.json
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## ⚙️ Installation & Setup
 
-### Other setup steps
+### 1. Install Frontend Dependencies
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Open the terminal in the project root directory:
 
-## Learn more
+cd "/Users/4star/restaurant-app"
+npm install
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 2. Install Backend Dependencies
 
-## Join the community
+Open a terminal and navigate to the backend directory:
 
-Join our community of developers creating universal apps.
+cd "/Users/4star/restaurant-app/CraveNest-Backend"
+npm install
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+### 3. Configure Environment Variables
+
+Create a `.env` file inside the `CraveNest-Backend` directory.
+
+
+PORT=5001
+MONGO_URI=your_mongodb_connection_string
+
+
+Replace the placeholder values with your actual MongoDB connection string and a strong JWT secret.
+
+**Important:** Never upload your `.env` file or database credentials to a public repository.
+
+### 4. Start the Backend Server
+
+Run the following command inside the `CraveNest-Backend` directory:
+
+
+npm run dev
+
+The backend runs at:
+
+http://localhost:5001
+
+Health check endpoint:
+
+http://localhost:5001/api/health
+
+Expected health check response:
+
+{
+  "success": true,
+  "message": "CraveNest API is working"
+}
+
+
+### 5. Start the Expo App
+
+Open a second terminal window:
+
+
+cd "/Users/4star/restaurant-app"
+npx expo start
+
+
+Scan the QR code using Expo Go to run the application on your phone.
+
+**Important:** When running the application on a physical phone, configure the frontend API URL to use your Mac's current local network IP address instead of `localhost`.
+
+Example:
+
+
+http://YOUR_MAC_IP:5001
+
+
+Make sure your phone and Mac are connected to the same Wi-Fi network.
+
+## 🗄️ Database
+
+The application uses MongoDB to store and manage restaurant data.
+
+The database supports:
+
+- User accounts and authentication
+- Food menu items
+- Customer orders
+- Table reservations
+- Food and restaurant reviews
+
+The backend uses Mongoose models to define and interact with database collections.
+
+## 🚪 Login Credentials
+
+Use registered accounts to log in to CraveNest.
+
+| Role | Email | Password |
+|---|---|---|
+| Customer | Your registered customer email | Your registered password |
+| Manager | Your configured manager email | Your configured manager password |
+
+*These are placeholders, not pre-created demo accounts. Login will work only after the relevant accounts have been created and the backend authentication is configured.*
+
+## 📡 API Endpoints
+
+Base URL:
+
+http://localhost:5001
+
+### 🔑 Authentication
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/signup` | Register a new user |
+| POST | `/api/auth/login` | Log in a user |
+
+### 🍔 Food Menu
+
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| GET | `/api/foods` | As configured | Retrieve food menu items |
+| POST | `/api/foods` | Verify backend permissions | Create a food item, if implemented |
+| PATCH | `/api/foods/:id` | Verify backend permissions | Update a food item, if implemented |
+| DELETE | `/api/foods/:id` | Verify backend permissions | Delete a food item, if implemented |
+
+### 🛒 Orders
+
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| POST | `/api/orders` | As configured | Place a new order |
+| GET | `/api/orders` | As configured | Retrieve orders, if implemented |
+| Additional routes | `/api/orders` | As configured | Verify order history, cancellation, and status operations |
+
+### 📅 Reservations
+
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| POST | `/api/reservations` | As configured | Create a table reservation |
+| GET | `/api/reservations` | As configured | Retrieve reservations, if implemented |
+| Additional routes | `/api/reservations` | As configured | Verify table availability and cancellation operations |
+
+### ⭐ Reviews
+
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| Available routes | `/api/reviews` | As configured | Review creation and retrieval, depending on implementation |
+
+*The endpoints above reflect the known CraveNest backend route structure. Verify each HTTP method, access permission, and operation in its corresponding route file before treating this table as the final API specification.*
+
+## 🧪 API Testing
+
+The backend APIs can be tested using Postman or Thunder Client.
+
+Suggested testing sequence:
+
+1. Start the backend server.
+2. Test `GET /api/health`.
+3. Register a customer using `POST /api/auth/signup`.
+4. Log in using `POST /api/auth/login`.
+5. Verify the returned authentication token.
+6. Retrieve food items using `GET /api/foods`.
+7. Test food search and menu display in the mobile app.
+8. Test adding items to favorites and the cart.
+9. Test order creation and order history.
+10. Test table reservation functionality.
+11. Test review functionality.
+12. Verify authentication and authorization for protected endpoints.
+
+## 💳 Payment Information
+
+CraveNest can provide payment-method selection through its mobile interface, depending on the implemented frontend functionality.
+
+Selecting a payment method does not itself process an online transaction. Integration with a supported payment gateway is required for real card, Easypaisa, or JazzCash payments. Cash on Delivery can be supported as a separate payment option.
