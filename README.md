@@ -47,7 +47,7 @@ CraveNest is a restaurant application developed using React Native (Expo), Node.
 - Store customer accounts and profile information
 - Manage food reviews through the review API
 
-*Note: Manager-specific access, order status management, and individual CRUD operations depend on the routes and role-based authorization implemented in the backend.*
+
 
 ## 🗂️ Project Structure
 
