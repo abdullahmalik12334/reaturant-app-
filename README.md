@@ -13,8 +13,8 @@ CraveNest is a restaurant application developed using React Native (Expo), Node.
 | Database | MongoDB Atlas / MongoDB Compass |
 | ODM | Mongoose |
 | Authentication | JWT (JSON Web Token) |
-| Password Security | bcryptjs |
-| API Testing | Thunder Client / Postman |
+| Password Security | bcrypt |
+| API Testing | Thunder Client |
 | Development Tools | Visual Studio Code, macOS Terminal |
 
 ## ✨ Features
