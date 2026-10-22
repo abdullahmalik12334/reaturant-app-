@@ -57,8 +57,6 @@ restaurant-app/
 ├── src/
 │   └── app/
 │       ├── index.tsx
-│       ├── _layout.tsx
-│       └── explore.tsx
 │
 ├── CraveNest-Backend/
 │   ├── middleware/
