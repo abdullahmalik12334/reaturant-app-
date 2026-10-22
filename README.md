@@ -251,6 +251,4 @@ Suggested testing sequence:
 
 ## 💳 Payment Information
 
-CraveNest can provide payment-method selection through its mobile interface, depending on the implemented frontend functionality.
-
 Selecting a payment method does not itself process an online transaction. Integration with a supported payment gateway is required for real card, Easypaisa, or JazzCash payments. Cash on Delivery can be supported as a separate payment option.
