@@ -83,7 +83,6 @@ restaurant-app/
 │   ├── seed.js
 │   └── server.js
 │
-├── package.json
 └── README.md
 ```
 
