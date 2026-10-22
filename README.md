@@ -7,8 +7,6 @@ CraveNest is a restaurant application developed using React Native (Expo), Node.
 | Layer | Technology |
 |---|---|
 | Mobile App | React Native, Expo |
-| Frontend Language | TypeScript, TSX |
-| Navigation | Expo Router |
 | Backend | Node.js, Express.js |
 | Database | MongoDB Atlas / MongoDB Compass |
 | ODM | Mongoose |
