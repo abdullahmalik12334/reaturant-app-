@@ -182,8 +182,8 @@ Use registered accounts to log in to CraveNest.
 
 | Role | Email | Password |
 |---|---|---|
-| Customer | Your registered customer email | Your registered password |
-| Manager | Your configured manager email | Your configured manager password |
+| Customer |  customer email |  password |
+| Manager |   manager email |   password |
 
 *These are placeholders, not pre-created demo accounts. Login will work only after the relevant accounts have been created and the backend authentication is configured.*
 
